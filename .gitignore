@@ -8,6 +8,9 @@
 # Builds
 /build/
 
+# Logs
+*.log
+
 # Prerequisites
 *.d
 

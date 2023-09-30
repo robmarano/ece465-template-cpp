@@ -4,6 +4,8 @@
 include ../../Base.mk
 
 TARGET := $(SERVER)
+INCLUDE := -I. $(INCLUDE)
+LDFLAGS := $(LDFLAGS) -lboost_thread-mt -lboost_program_options-mt -lboost_system -lboost_chrono
 
 SRC      :=  $(wildcard *.cpp)
 
@@ -17,7 +19,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS)
+	$(CXX) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS)
 
 .PHONY: all build clean debug release
 
@@ -36,5 +38,6 @@ server: $(APP_DIR)/$(SERVER)
 server: all
 
 run: $(APP_DIR)/$(TARGET)
-	LD_LIBRARY_PATH=$(HOME)/dev/boost/stage/lib $(APP_DIR)/$(CLIENT) $(APP_DIR)/$(TARGET)
+	LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$(LB_LIBRARY_PATH) \
+		$(APP_DIR)/$(CLIENT) $(APP_DIR)/$(TARGET)
 

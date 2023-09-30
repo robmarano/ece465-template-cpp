@@ -4,6 +4,7 @@
 include ../../Base.mk
 
 TARGET := $(CLIENT)
+INCLUDE := -I. $(INCLUDE)
 
 SRC      := $(wildcard ./*.cpp)
 
@@ -17,7 +18,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS)
+	$(CXX) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS)
 
 .PHONY: all build clean debug release
 
@@ -36,5 +37,6 @@ client: $(APP_DIR)/$(CLIENT)
 client: all
 
 run: $(APP_DIR)/$(TARGET)
-	LD_LIBRARY_PATH=$(HOME)/dev/boost/stage/lib $(APP_DIR)/$(CLIENT) $(APP_DIR)/$(TARGET)
+	LD_LIBRARY_PATH=/usr/lib:/usr/local/lib:$(LD_LIBRARY_PATH) \
+		$(APP_DIR)/$(CLIENT) $(APP_DIR)/$(TARGET)
 
