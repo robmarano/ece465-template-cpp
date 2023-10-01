@@ -23,4 +23,4 @@ clean:
 	-@rm -rvf $(OBJ_DIR)/*
 	-@rm -rvf $(APP_DIR)/*
 	-@rm -rvf $(BUILD)
-	-@rm *.log
+	-@rm -f *.log

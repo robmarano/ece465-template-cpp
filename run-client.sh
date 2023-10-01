@@ -3,8 +3,10 @@
 echo "Running threaded-client ..."
 
 os_platform=$(uname -s)
-BOOST_ROOT=/usr/local
-BOOST_LIB=${BOOST_ROOT}/lib
+# change BOOST_ROOT to root folder of your boost installation
+# if you built and left Boost in $HOME/dev/boost_1_83_0, set it to that
+BOOST_ROOT=${HOME}/dev/boost_1_83_0
+BOOST_LIB=${BOOST_ROOT}/stage/lib
 LIBPATH=${BOOST_LIB}
 
 case "${os_platform}" in

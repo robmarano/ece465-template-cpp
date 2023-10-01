@@ -9,11 +9,12 @@
 export SERVER := threaded-server
 export CLIENT := threaded-client
 
-#export BOOST_ROOT := $(HOME)/dev/boost_1_83_0
-export BOOST_LIB := /usr/lib/x86_64-linux-gnu/
+export BOOST_ROOT := $(HOME)/dev/boost_1_83_0
+export BOOST_LIB := $(BOOST_ROOT)/stage/lib
+export BOOST_INC := ${BOOST_ROOT}
 #export BOOST_LIB_SUFFIX := -mt
+
 #export LD_LIBRARY_PATH := ${BOOST_ROOT}/lib:${LD_LIBRARY_PATH}
-#export BOOST_INC := ${BOOST_ROOT}
 export LDFLAGS := -L$(BOOST_LIB) -L/usr/lib -L/usr/local/lib
 export LDFLAGS := -pthread -std=c++11 $(LDFLAGS)
 
