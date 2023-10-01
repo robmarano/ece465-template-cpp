@@ -1,8 +1,6 @@
-#ifndef COMMON_H
-#define COMMON_H
 /**
 
-common.h
+main-server.cpp
 
 Copyright (c) 2019 Rob Marano, rob@konsilix.com, http://www.konsilix.com
 
@@ -25,10 +23,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 #include <iostream>
+#include <boost/asio.hpp>
 #include <boost/thread.hpp>
-#include <boost/date_time.hpp>
+#include <boost/chrono.hpp>
 
-void workerFunc();
+#include "threaded_server.hpp"
+//#include "../common/common.hpp"
 
-#endif /* COMMON_H*/
+using namespace boost::asio;
+using ip::tcp;
+using std::cout;
+using std::endl;
+using std::string;
+
+int main(int argc, char *argv[])
+{
+    cout << "main: startup"
+         << " at " << boost::chrono::system_clock::now() << endl;
+    try {
+        run_server();
+    } catch (boost::exception &e) {
+        std::cerr << boost::diagnostic_information(e);
+    }
+    cout << "main: done"
+         << " at " << boost::chrono::system_clock::now() << endl;
+    return 0;
+}

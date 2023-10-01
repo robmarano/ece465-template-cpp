@@ -1,3 +1,5 @@
+#ifndef THREADED_SERVER_HPP
+#define THREADED_SERVER_HPP
 /**
 
 threaded-server.hpp
@@ -23,3 +25,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+#include <iostream>
+#include <boost/asio.hpp>
+#include <boost/thread.hpp>
+#include <boost/chrono.hpp>
+//#include "../common/common.hpp"
+
+using namespace boost::asio;
+using ip::tcp;
+using std::cout;
+using std::endl;
+using std::string;
+
+int run_server(void);
+
+string read_(tcp::socket &socket);
+
+void send_(tcp::socket &socket, const string &message);
+
+void wait(int seconds);
+
+void threaded_socket_processing(void);
+
+#endif // THREADED_SERVER_HPP

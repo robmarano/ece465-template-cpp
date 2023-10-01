@@ -1,6 +1,6 @@
 /**
 
-threaded-client.hpp
+main-client.cpp
 
 Copyright (c) 2019 Rob Marano, rob@konsilix.com, http://www.konsilix.com
 
@@ -23,3 +23,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+#include "threaded_client.hpp"
+
+int main(int argc, char* argv[]) {
+    // Get the current time
+    boost::chrono::system_clock::time_point now = boost::chrono::system_clock::now();
+    cout << "main: startup @ " << now << endl;
+    try {
+        run_client();
+    } catch (boost::exception &e) {
+        std::cerr << boost::diagnostic_information(e);
+    }
+    cout << "main: done" << endl;
+    return 0;
+}

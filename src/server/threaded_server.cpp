@@ -24,17 +24,27 @@ THE SOFTWARE.
 
 */
 
-#include <iostream>
-#include <boost/asio.hpp>
-#include <boost/thread.hpp>
-#include <boost/chrono.hpp>
-#include "../common/common.hpp"
+#include "threaded_server.hpp"
 
 using namespace boost::asio;
 using ip::tcp;
 using std::cout;
 using std::endl;
 using std::string;
+
+int run_server(void)
+{
+    cout << "run_server: startup"
+         << " at " << boost::chrono::system_clock::now() << endl;
+    boost::thread workerThread(threaded_socket_processing);
+
+    cout << "run_server: waiting for thread" << endl;
+    workerThread.join();
+
+    cout << "run_server: done"
+         << " at " << boost::chrono::system_clock::now() << endl;
+    return 0;
+}
 
 string read_(tcp::socket &socket)
 {
@@ -76,18 +86,4 @@ void threaded_socket_processing(void)
     cout << "Server sent Hello message to Client!" << endl;
 
     wait(5);
-}
-
-int main(int argc, char *argv[])
-{
-    cout << "main: startup"
-         << " at " << boost::chrono::system_clock::now() << endl;
-    boost::thread workerThread(threaded_socket_processing);
-
-    cout << "main: waiting for thread" << endl;
-    workerThread.join();
-
-    cout << "main: done"
-         << " at " << boost::chrono::system_clock::now() << endl;
-    return 0;
 }

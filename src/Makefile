@@ -3,7 +3,7 @@
 #
 include ../Base.mk
 
-SUBDIRS := server client
+SUBDIRS := client server
 TOPTARGETS := all clean
 
 .PHONY: $(TOPTARGETS) $(SUBDIRS)
