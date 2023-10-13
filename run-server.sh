@@ -2,6 +2,8 @@
 
 echo "Running server ..."
 
+PROGRAM=myServer
+MYPORT=13
 os_platform=$(uname -s)
 # change BOOST_ROOT to root folder of your boost installation
 # if you built and left Boost in $HOME/dev/boost_1_83_0, set it to that
@@ -14,11 +16,11 @@ LOG="server.log"
 case "${os_platform}" in
 	Darwin*)
 		OS=Mac
-		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/server 2>&1 > ${LOG} &
+		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/$PROGRAM $MYPORT 2>&1 > ${LOG} &
 		echo "Server running in background. Check ${LOG}";;
 	Linux*)
 		OS=Linux
-		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/server 2>&1 > ${LOG} &
+		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/$PROGRAM $MYPORT 2>&1 > ${LOG} &
 		echo "Server running in background. Check ${LOG}";;
 	*)	
 		OS=Unknown
