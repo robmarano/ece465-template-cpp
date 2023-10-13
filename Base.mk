@@ -6,8 +6,8 @@
 # networking, etc. Do NOT forget to configure BOOST_ROOT below.
 #
 
-export SERVER := server
-export CLIENT := client
+export SERVER := myServer
+export CLIENT := myClient
 
 export BOOST_ROOT := /usr
 export BOOST_LIB := $(BOOST_ROOT)/lib
