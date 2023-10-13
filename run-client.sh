@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Running threaded-client ..."
+echo "Running client ..."
 
 os_platform=$(uname -s)
 # change BOOST_ROOT to root folder of your boost installation
@@ -12,10 +12,10 @@ LIBPATH=${BOOST_LIB}
 case "${os_platform}" in
 	Darwin*)
 		OS=Mac
-		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/threaded-client;;
+		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/client;;
 	Linux*)
 		OS=Linux
-		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/threaded-client;;
+		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/client;;
 	*)	
 		OS=Unknown
 		echo "Don't know how to run on your ${OS}.";;

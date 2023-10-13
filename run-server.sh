@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Running threaded-server ..."
+echo "Running server ..."
 
 os_platform=$(uname -s)
 # change BOOST_ROOT to root folder of your boost installation
@@ -14,11 +14,11 @@ LOG="server.log"
 case "${os_platform}" in
 	Darwin*)
 		OS=Mac
-		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/threaded-server 2>&1 > ${LOG} &
+		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/server 2>&1 > ${LOG} &
 		echo "Server running in background. Check ${LOG}";;
 	Linux*)
 		OS=Linux
-		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/threaded-server 2>&1 > ${LOG} &
+		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/server 2>&1 > ${LOG} &
 		echo "Server running in background. Check ${LOG}";;
 	*)	
 		OS=Unknown
