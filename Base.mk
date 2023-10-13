@@ -6,12 +6,12 @@
 # networking, etc. Do NOT forget to configure BOOST_ROOT below.
 #
 
-export SERVER := threaded-server
-export CLIENT := threaded-client
+export SERVER := server
+export CLIENT := client
 
-export BOOST_ROOT := $(HOME)/dev/boost_1_83_0
-export BOOST_LIB := $(BOOST_ROOT)/stage/lib
-export BOOST_INC := ${BOOST_ROOT}
+export BOOST_ROOT := /usr
+export BOOST_LIB := $(BOOST_ROOT)/lib
+export BOOST_INC := ${BOOST_ROOT}/include/boost
 #export BOOST_LIB_SUFFIX := -mt
 
 #export LD_LIBRARY_PATH := ${BOOST_ROOT}/lib:${LD_LIBRARY_PATH}
