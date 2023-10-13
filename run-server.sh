@@ -3,7 +3,7 @@
 echo "Running server ..."
 
 PROGRAM=myServer
-MYPORT=13
+MYPORT=9999
 os_platform=$(uname -s)
 # change BOOST_ROOT to root folder of your boost installation
 # if you built and left Boost in $HOME/dev/boost_1_83_0, set it to that
