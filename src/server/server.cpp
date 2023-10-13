@@ -24,10 +24,15 @@ std::string printFile(boost::array<char, 1024> buf, int length)
 
  
 
-int main()
+int main(int argc, char* argv[]) {
 
-{
+    if (argc != 2) {
 
+        std::cerr << "Usage: server <port>\n";
+
+        return 1;
+
+    }
  
 
   try
