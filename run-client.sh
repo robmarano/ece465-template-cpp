@@ -12,10 +12,10 @@ LIBPATH=${BOOST_LIB}
 case "${os_platform}" in
 	Darwin*)
 		OS=Mac
-		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/client;;
+		DYLD_LIBRARY_PATH=${LIBPATH}:${DYLD_LIBRARY_PATH} ./build/apps/client localhost 13;;
 	Linux*)
 		OS=Linux
-		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/client;;
+		LD_LIBRARY_PATH=${LIBPATH}:${LD_LIBRARY_PATH} ./build/apps/client localhost 13;;
 	*)	
 		OS=Unknown
 		echo "Don't know how to run on your ${OS}.";;
