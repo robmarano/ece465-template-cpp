@@ -9,7 +9,7 @@
 export SERVER := myServer
 export CLIENT := myClient
 
-export BOOST_ROOT := /usr
+export BOOST_ROOT := /Users/rob/cooper/ece465/boost_1_83_0
 export BOOST_LIB := $(BOOST_ROOT)/lib
 export BOOST_INC := ${BOOST_ROOT}/include/boost
 #export BOOST_LIB_SUFFIX := -mt
