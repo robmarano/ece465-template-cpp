@@ -6,9 +6,9 @@ ps aux|egrep ${CMD_NAME} | egrep -v grep
 
 # kill it
 PIDS=$(ps aux|egrep ${CMD_NAME} | egrep -v grep | awk '{print $2}')
-if [ -z "$var" ]
+if [ -z "$PIDS" ]
 then
-      echo "No ${CMD_NAME} running."
+      echo "No ${CMD_NAME} running anymore."
 else
     for pid in $PIDS
     do

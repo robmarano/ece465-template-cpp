@@ -34,7 +34,7 @@ int main(int argc, char const* argv[]) {
 	// GET /hello
 	mux.handle("/hello")
 		.get([](served::response & res, const served::request & req) {
-			res << "Hello world!";
+			res << "Hello world!\n";
 		});
 
 	// Create the server and run with 10 handler threads.
