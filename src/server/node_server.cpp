@@ -1,8 +1,6 @@
-#ifndef THREADED_SERVER_HPP
-#define THREADED_SERVER_HPP
 /**
 
-threaded-server.hpp
+main-server.cpp
 
 Copyright (c) 2019 Rob Marano, rob@konsilix.com, http://www.konsilix.com
 
@@ -27,25 +25,21 @@ THE SOFTWARE.
 */
 
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/thread.hpp>
-#include <boost/chrono.hpp>
-//#include "../common/common.hpp"
+#include <served/served.hpp>
 
-using namespace boost::asio;
-using ip::tcp;
-using std::cout;
-using std::endl;
-using std::string;
+int main(int argc, char const* argv[]) {
+	// Create a multiplexer for handling requests
+	served::multiplexer mux;
 
-int run_server(void);
+	// GET /hello
+	mux.handle("/hello")
+		.get([](served::response & res, const served::request & req) {
+			res << "Hello world!";
+		});
 
-string read_(tcp::socket &socket);
+	// Create the server and run with 10 handler threads.
+	served::net::server server("127.0.0.1", "8080", mux);
+	server.run(10);
 
-void send_(tcp::socket &socket, const string &message);
-
-void wait(int seconds);
-
-void threaded_socket_processing(void);
-
-#endif // THREADED_SERVER_HPP
+	return (EXIT_SUCCESS);
+}

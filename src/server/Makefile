@@ -5,6 +5,7 @@ include ../../Base.mk
 
 TARGET := $(SERVER)
 INCLUDE := -I. $(INCLUDE)
+NEED_SERVED_LIBS := -l served
 NEED_BOOST_LIBS := -l boost_system$(BOOST_LIB_SUFFIX) -l boost_chrono$(BOOST_LIB_SUFFIX) -l boost_program_options$(BOOST_LIB_SUFFIX) -l boost_thread$(BOOST_LIB_SUFFIX)
 #NEED_BOOST_LIBS := -l boost_chrono$(BOOST_LIB_SUFFIX)
 
@@ -20,7 +21,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
-	$(CXX) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS) $(NEED_BOOST_LIBS)
+	$(CXX) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS) $(NEED_BOOST_LIBS) $(NEED_SERVED_LIBS)
 
 .PHONY: all build clean debug release
 
