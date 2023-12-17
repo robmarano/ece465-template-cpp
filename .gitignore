@@ -5,10 +5,14 @@
 # for MacOS
 .DS_Store
 
+# JetBrains
+/.idea
+
 # Builds
 /build/
 /served_build
 /served.build
+/zookeeper-cpp.build
 
 # Logs
 *.log

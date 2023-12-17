@@ -1,3 +1,9 @@
 [submodule "served"]
 	path = served
 	url = https://github.com/meltwater/served.git
+[submodule "zookeeper"]
+	path = zookeeper
+	url = git@github.com:apache/zookeeper.git
+[submodule "zookeeper-cpp"]
+	path = zookeeper-cpp
+	url = https://github.com/tgockel/zookeeper-cpp

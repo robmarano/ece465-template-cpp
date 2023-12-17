@@ -8,28 +8,31 @@
 
 export ABS_REPO_PATH := $(shell git rev-parse --show-toplevel)
 
-export SERVER := node-server
-export CLIENT := svc-client
+export TARGET := zkApp
 
 export BOOST_ROOT := /usr/local
 export BOOST_LIB := $(BOOST_ROOT)/lib
 export BOOST_INC := $(BOOST_ROOT)/include
-#export BOOST_LIB_SUFFIX := -mt
 
+# zookeeper-cpp code
+export ZKCPP=$(ABS_REPO_PATH)/zookeeper-cpp/src
+export ZKCPPBUILD=$(ABS_REPO_PATH)/zookeeper-cpp.build
+
+# served code
 export SERVED_ROOT := $(ABS_REPO_PATH)/served.build/build/libserved-1.4.3-Linux
 export SERVED_LIB := $(SERVED_ROOT)/lib
 export SERVED_INC := $(SERVED_ROOT)/include
 
-#export LD_LIBRARY_PATH := ${BOOST_ROOT}/lib:${LD_LIBRARY_PATH}
-export LDFLAGS := -L/usr/lib -L/usr/local/lib -L$(BOOST_LIB) -L$(SERVED_LIB)
-export LDFLAGS := -pthread -std=c++11 $(LDFLAGS)
 
-export PROJECT_HOME := $(PWD)
-export BUILD := $(PROJECT_HOME)/build
 export CXX := g++
-export INCLUDE := -I$(BOOST_INC) -I$(SERVED_INC)
-#CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror
-#CXXFLAGS := -Wall -Wc++11-extensions -Wc++11-long-long
-export CXXFLAGS := -pedantic -pthread -g -w -Wfatal-errors
+export INCLUDE := -I. -I$(ZKCPP) -I$(BOOST_ROOT)/include -DZKPP_FUTURE_USE_BOOST
+export CFLAGS := -DDEBUG -DTHREADED -pedantic -pthread -g -w -std=c++17 -fpermissive #-Wfatal-errors 
+export LDFLAGS := -L$(BOOST_LIB) -L$(ZKCPPBUILD) -L$(SERVED_LIB) -L/usr/lib -L/usr/local/lib
+export LDFLAGS := -pthread -std=c++11 $(LDFLAGS) -lboost_thread -lzkpp -lzkpp-server #-lserved
+
+
+export PROJECT_HOME := $(ABS_REPO_PATH)
+export BUILD := $(PROJECT_HOME)/build
+
 export OBJ_DIR := $(BUILD)/objects
 export APP_DIR := $(BUILD)/apps

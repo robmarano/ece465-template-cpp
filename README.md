@@ -7,6 +7,30 @@ This has been tested on Ubuntu (WSL) and Mac OS. Be careful to configure Base.mk
 
 Before you begin, you will need to build the [ServeD RESTful framework](https://github.com/meltwater/served), which is included in this repo as a submodule. You can see it as [served](./served/) when you at the contents of this directory.
 
+# Build Apache Zookeeper (for C libs)
+Start with a terminal on Linux or macos in the repo as cloned on your computer. Mine will be in ```$HOME/dev/cooper/ece465/ece465-template-cpp```
+
+### Building Zookeeper from source
+```bash
+$ cd ece465-template-cpp
+$ git checkout zkApp
+$ git submodule update --init --recursive
+$ cd zookeeper
+$ wget -O - https://apt.corretto.aws/corretto.key | sudo gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg && \
+echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | sudo tee /etc/apt/sources.list.d/corretto.list
+$ sudo apt-get update; sudo apt-get install -y java-21-amazon-corretto-jdk
+$ sudo apt install -y ivy maven ant autoconf automake libtool
+$ sudo chmod +x /usr/share/java/ivy-2.5.0.jar
+$ export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
+$ mvn clean install -DskipTests
+$ cd zookeeper-client/zookeeper-client-c
+$ autoreconf -if
+$ ./configure --enable-debug --without-cppunit 
+$ make
+$ make install
+$ 
+```
+
 # Build ServeD
 Start with a terminal on Linux or macos in the repo as cloned on your computer. Mine will be in ```$HOME/dev/cooper/ece465/ece465-template-cpp```
 
@@ -14,10 +38,11 @@ You will need to install ```cmake``` on your Linux or macos:
 * On Debian Linux (ubuntu) you will issue the command ```apt update &&  apt install -y cmake```
 * On macos with Homebrew you will issue the command ```brew install cmake```
 
-### Build ServeD
+### Building ServeD
 ```bash
 $ cd ece465-template-cpp
 $ git checkout zkApp
+$ git submodule update --init --recursive
 $ mkdir served.build
 $ cd served.build
 $ cmake ../served
@@ -28,6 +53,7 @@ After it is successfully built, you will issue the following commands:
 ```bash
 $ cd ece465-template-cpp
 $ git checkout zkApp
+$ git submodule update --init --recursive
 $ cd served.build
 $ make package
 ```

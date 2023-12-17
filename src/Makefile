@@ -1,14 +1,23 @@
 #
-# src/
+# src/Makefile
 #
+
 include ../Base.mk
 
-SUBDIRS := client server
-TOPTARGETS := all clean
+SRC      :=  $(wildcard *.cpp)
 
-.PHONY: $(TOPTARGETS) $(SUBDIRS)
+OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-$(TOPTARGETS): $(SUBDIRS)
-	
-$(SUBDIRS):
-	+$(MAKE) -C $@ $(MAKECMDGOALS)
+all: build $(APP_DIR)/$(TARGET)
+
+$(OBJ_DIR)/%.o: %.cpp
+	$(CXX) -c $(CFLAGS) $(INCLUDE) -o $@ $<
+
+$(APP_DIR)/$(TARGET): $(OBJECTS)
+	$(CXX) -o $(APP_DIR)/$(TARGET) $(OBJECTS) $(LDFLAGS)
+
+.PHONY: all build clean debug release
+
+build:
+	@mkdir -p $(APP_DIR)
+	@mkdir -p $(OBJ_DIR)
